@@ -1,0 +1,51 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+<form method="GET">
+    {{ filter.form }}
+    <input type="submit" value="Найти">
+</form>
+        <table>
+            <tr>
+                <td>
+                    Заголовок 
+                </td>
+				<td>
+                    Автор 
+                </td>
+                <td>
+                    Дата создания 
+                </td>
+                <td>
+                    Текст статьи 
+                </td>
+               
+            </tr>
+        {% for article in filter.qs %}
+            <tr>
+                <td>
+                    {{ article.header}}
+                </td>
+				<td>
+                    {{ article.authorArticle.account}}
+                </td>
+                <td>
+					{{ article.creationTime}}
+                </td>
+                <td>
+                    {{ article.postText}}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+  
+<!-- Проверяем что поддерживается постраничный вывод -->
+ 
+
+{% endblock content %}

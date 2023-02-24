@@ -1,0 +1,43 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+    <h1>Всего {{ newsall|length }} новости  </h1>
+    <hr>
+    {% if newsall %}
+        <table>
+            <tr>
+                <td>
+                    Заголовок
+                </td>
+                <td>
+                    Дата
+                </td>
+                <td>
+                    Текст статьи
+                </td>
+               
+            </tr>
+        {% for article in newsall %}
+            <tr>
+                <td>
+                    {{ article.header|censor}}
+                </td>
+                <td>
+		    {{ article.creationTime}}
+                </td>
+                <td>
+                    {{ article.description|truncatechars:50|censor}}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>Новостей нет!</h2>
+    {% endif %}
+{% endblock content %}

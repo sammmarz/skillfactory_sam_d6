@@ -1,0 +1,52 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+   
+ 
+   
+    {% if news %}
+        <table>
+            <tr>
+                <td>
+                    Заголовок
+                </td>
+				<td>
+                    Автор
+                </td>
+                <td>
+                    Дата создания
+                </td>
+                <td>
+                    Текст статьи
+                </td>
+               
+            </tr>
+        
+            <tr>
+                <td>
+                    {{ news.header}}
+					<a href="{% url 'news_delete' news.id %}"><u> Удалить </u></a>
+	                <a href="{% url 'news_update' news.id %}"><u> Редактировать </u></a>
+                </td>
+				<td>
+                    {{ news.authorArticle.account}}
+                </td>
+                <td>
+		   {{ news.creationTime.day}}-{{ news.creationTime.month}}-{{news.creationTime.year}} {{ news.creationTime.hour}}:{{ news.creationTime.minute}}
+                </td>
+                <td>
+                    {{ news.postText}}
+                </td>
+            </tr>
+       
+        </table>
+    {% else %}
+        <h2>Новостей нет!</h2>
+    {% endif %}
+{% endblock content %}
